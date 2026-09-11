@@ -10,11 +10,17 @@ class SOrderSingle : IScene
 	public ExitContext Run()
 	{
 
-		var order = OrderBuilder.RunWizard("== Lasses last 1.0 || ENSKILD FRAKT ==");
+		string header = "== Lasses last 1.0 || ENSKILD FRAKT ==";
+		var order = OrderBuilder.RunWizard(header);
 		string receipt = ReceiptManager.GetReceipt(order);
 		ReceiptManager.SaveToFile(order);
 
+		Console.Clear();
+		Console.WriteLine(header);
 		Console.WriteLine(receipt);
+		Console.WriteLine("\nTryck valfri knapp för att fortsätta...");
+
+		Console.ReadKey();
 
 		return new(null);
 	}
