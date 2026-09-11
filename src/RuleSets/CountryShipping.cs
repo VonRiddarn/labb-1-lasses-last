@@ -1,6 +1,6 @@
 static class CountryShipping
 {
-	const string FILE_PATH = "src/RuleSets/countries.ssv";
+	const string FILE_PATH = "data/countries.ssv";
 
 	// Lazy initialization so that we don't need to re-fetch countries from file several times per runtime
 	static Dictionary<string, decimal>? _kvps = null;
