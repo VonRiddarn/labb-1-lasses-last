@@ -5,9 +5,6 @@ static class OrderBuilder
 {
 	public static Order RunWizard(string header)
 	{
-		// TODO: move into file later
-		string[] countries = ["Sverige"];
-
 		StringBuilder accumulativeMenu = new($"{header}\n");
 		Console.Clear();
 		Console.WriteLine(accumulativeMenu.ToString());
@@ -16,10 +13,9 @@ static class OrderBuilder
 		Console.Clear();
 		Console.Write(accumulativeMenu.Append($"Namn: {name}\n").ToString());
 
-		int countryIndex = Cah.Input.ParseCustom("Vilket land ska du frakta till? ", countries);
-		string ctry = countries[countryIndex];
+		string country = Cah.Input.ParseCustom("Vilket land ska du frakta till? ", CountryShipping.AllCountries, showAlternatives: true);
 		Console.Clear();
-		Console.Write(accumulativeMenu.Append($"Land: {countries[countryIndex]}\n").ToString());
+		Console.Write(accumulativeMenu.Append($"Land: {country}\n").ToString());
 
 		decimal kilos = Cah.Input.ParseLine<decimal>("Vikt (kg): ");
 		Console.Clear();
@@ -37,7 +33,7 @@ static class OrderBuilder
 		Console.Clear();
 		Console.Write(accumulativeMenu.Append($"Försäkra: {(wantInsurance ? "Ja" : "Nej")}\n").ToString());
 
-		return new(name, kilos, value, member, wantInsurance, ctry);
+		return new(name, kilos, value, member, wantInsurance, country);
 	}
 
 	// TODO: Create accumulative menu object

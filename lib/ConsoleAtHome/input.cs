@@ -47,8 +47,28 @@ public static partial class Cah
 		/// <summary>
 		/// Force the user to enter a valid string from an array of strings.
 		/// </summary>
+		/// <returns>The match.</returns>
+		public static string ParseCustom(string prompt, string[] choices, bool showAlternatives = false, bool clear = false)
+		{
+			if (showAlternatives)
+				Console.WriteLine($"Alternativ:\n{string.Join('\n', choices)}");
+
+			while (true)
+			{
+				ClearAndPrompt(prompt, clear);
+				string? input = Console.ReadLine();
+				int index = choices.IndexOf(input, StringComparer.InvariantCultureIgnoreCase);
+
+				if (index != -1)
+					return choices[index];
+			}
+		}
+
+		/// <summary>
+		/// Force the user to enter a valid string from an array of strings.
+		/// </summary>
 		/// <returns>The index of the match.</returns>
-		public static int ParseCustom(string prompt, string[] choices, bool clear = false)
+		public static int ParseCustomToIndex(string prompt, string[] choices, bool clear = false)
 		{
 			while (true)
 			{
