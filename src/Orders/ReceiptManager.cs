@@ -80,4 +80,25 @@ static class ReceiptManager
 			return false;
 		}
 	}
+
+	public static string GetReceiptFromFile(string searchPattern)
+	{
+
+		if (searchPattern.StartsWith(ORDER_PREFIX, ignoreCase: true, null))
+			searchPattern = searchPattern[ORDER_PREFIX.Length..];
+
+		string filePath = Path.Combine(ORDERS_DIRECTORY, $"{ORDER_PREFIX}{searchPattern}");
+
+		try
+		{
+			if (File.Exists(filePath))
+				return File.ReadAllText(filePath);
+
+			return string.Empty;
+		}
+		catch
+		{
+			return string.Empty;
+		}
+	}
 }

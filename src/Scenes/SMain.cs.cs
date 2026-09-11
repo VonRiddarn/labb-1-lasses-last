@@ -14,7 +14,8 @@ class SMain : IScene
 			Console.WriteLine("VÄLKOMMEN TILL LASSES LAST 1.0\n");
 			Console.WriteLine("1) Beräkna frakt för ett paket");
 			Console.WriteLine("2) Beräkna frakt för flera paket från fil");
-			Console.WriteLine("3) Avsluta\n");
+			Console.WriteLine("3) Hitta en order");
+			Console.WriteLine("4) Avsluta\n");
 			string input = Cah.Input.ReadLine("Val: ");
 
 			switch (input)
@@ -22,6 +23,8 @@ class SMain : IScene
 				case "1":
 					return new(SceneRepository.OrderSingle, true);
 				case "3":
+					return new(SceneRepository.FindOrder, true);
+				case "4":
 					return new(null);
 				default:
 					Console.WriteLine("Fel val!");
