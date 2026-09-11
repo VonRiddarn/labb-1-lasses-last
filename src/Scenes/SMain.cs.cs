@@ -10,6 +10,7 @@ class SMain : IScene
 	{
 		while (true)
 		{
+			Console.Clear();
 			Console.WriteLine("VÄLKOMMEN TILL LASSES LAST 1.0\n");
 			Console.WriteLine("1) Beräkna frakt för ett paket");
 			Console.WriteLine("2) Beräkna frakt för flera paket från fil");
