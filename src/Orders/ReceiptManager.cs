@@ -5,7 +5,7 @@ static class ReceiptManager
 	const string INDEXER_PATH = "orders/.INDEXER";
 
 	const string ORDERS_DIRECTORY = "orders";
-	const string ORDER_PREFIX = "PK-";
+	public const string ORDER_PREFIX = "PK-";
 
 	static readonly StringBuilder _sb = new();
 
@@ -24,7 +24,7 @@ static class ReceiptManager
 		}
 	}
 
-	public static string GetReceipt(Order order)
+	public static string CreateReceipt(Order order)
 	{
 		bool validCountry = CountryShipping.TryGetPrice(order.Country, out decimal shippingCost);
 
@@ -67,7 +67,7 @@ static class ReceiptManager
 		if (index == -1)
 			return false;
 
-		string receipt = GetReceipt(order);
+		string receipt = CreateReceipt(order);
 
 		try
 		{

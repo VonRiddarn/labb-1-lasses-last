@@ -12,7 +12,7 @@ class SOrderSingle : IScene
 
 		string header = "== Lasses last 1.0 || ENSKILD FRAKT ==";
 		var order = OrderBuilder.RunWizard(header);
-		string receipt = ReceiptManager.GetReceipt(order);
+		string receipt = ReceiptManager.CreateReceipt(order);
 		ReceiptManager.SaveToFile(order);
 
 		Console.Clear();
