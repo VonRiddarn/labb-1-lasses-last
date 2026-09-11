@@ -52,7 +52,7 @@ static class ReceiptManager
 		if (wc.Heavy > 0)
 			_sb.AppendLine($"⨽ Tungviktstillägg:\t{wc.Heavy:F2}\t\tSEK");
 
-		if (ic > 0)
+		if (order.IsInsured && ic > 0)
 			_sb.AppendLine($"Försäkringsavgift:\t{ic:F2}\t\tSEK");
 		_sb.AppendLine("-----------------------------");
 		_sb.AppendLine($"Total:\t\t\t{(baseCost + wc.Total + ic):F2}\t\tSEK");
