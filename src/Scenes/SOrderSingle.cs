@@ -10,11 +10,10 @@ class SOrderSingle : IScene
 	public ExitContext Run()
 	{
 
-		var order = OrderBuilder.RunWizard("== Lasses last 1.0 || ENSKILD FRAKT");
+		var order = OrderBuilder.RunWizard("== Lasses last 1.0 || ENSKILD FRAKT ==");
 		string receipt = ReceiptManager.GetReceipt(order);
 
 		Console.WriteLine(receipt);
-		File.WriteAllText("receipt.txt", receipt);
 
 		Console.ReadLine();
 
