@@ -6,6 +6,9 @@ public static partial class Cah
 {
 	public static class Input
 	{
+		static readonly string[] yesColl = ["ja", "yes", "y", "j", "1"];
+		static readonly string[] noColl = ["nej", "no", "n", "0"];
+
 		public static string ReadLine(string prompt = "", bool clear = false)
 		{
 			ClearAndPrompt(prompt, clear);
@@ -29,19 +32,32 @@ public static partial class Cah
 
 		public static bool ParseYesNo(string prompt, bool clear = false)
 		{
-			string[] yesCol = ["ja", "yes", "y", "j", "1"];
-			string[] noCol = ["nej", "no", "n", "0"];
-
 			while (true)
 			{
 				ClearAndPrompt(prompt, clear);
 				string? input = Console.ReadLine()?.ToLower();
 
-				if (yesCol.Contains(input))
+				if (yesColl.Contains(input))
 					return true;
-				else if (noCol.Contains(input))
+				else if (noColl.Contains(input))
 					return false;
 			}
+		}
+
+		public static bool TryReverseParseYesNo(string input, out bool result)
+		{
+			input = input.ToLower();
+			result = false;
+
+			if (noColl.Contains(input))
+				return true;
+			else if (yesColl.Contains(input))
+			{
+				result = true;
+				return true;
+			}
+
+			return false;
 		}
 
 		/// <summary>
