@@ -32,6 +32,10 @@ class Order(string recipient, decimal weightInKg, decimal assetValue, bool isMem
 		return new(fields[0], weightInKg, assetValue, isMember, isInsured, fields[5]);
 	}
 
+	// A good thing to do here would be to NOT return an Order array directly.
+	// We should return something like a Result<T,P>, so that we could send back a payload, but also a message of some kind.
+	// Like "6 items failed to parse" in addition to the actual payload.
+	// This is outside the scope and I do not have time though. So failed parses are just dropped silently.
 	static public Order[] FromSSV(string[] rows)
 	{
 		List<Order> r = [];
