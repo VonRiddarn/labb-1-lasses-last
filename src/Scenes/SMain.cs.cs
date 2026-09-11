@@ -22,6 +22,8 @@ class SMain : IScene
 			{
 				case "1":
 					return new(SceneRepository.OrderSingle, true);
+				case "2":
+					return new(SceneRepository.OrderMultiple, true);
 				case "3":
 					return new(SceneRepository.FindOrder, true);
 				case "4":
