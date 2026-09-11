@@ -39,7 +39,8 @@ static class ReceiptManager
 		_sb.AppendLine($"Medlem: {(order.IsMember ? "Ja" : "Nej")}");
 		_sb.AppendLine($"Försäkrad: {(order.IsInsured ? "Ja" : "Nej")}");
 
-		_sb.AppendLine($"\nGrundavgift:\t\t{PriceRules.BaseCost}\t\tSEK");
+		decimal baseCost = validCountry ? shippingCost : PriceRules.BaseCost;
+		_sb.AppendLine($"\nGrundavgift:\t\t{baseCost}\t\tSEK");
 
 		var wc = PriceRules.GetWeightCost(order.WeightInKg, order.IsMember);
 		decimal ic = PriceRules.GetInsuranceCost(order.AssetValue);
@@ -53,10 +54,8 @@ static class ReceiptManager
 
 		if (ic > 0)
 			_sb.AppendLine($"Försäkringsavgift:\t{ic:F2}\t\tSEK");
-		if (validCountry)
-			_sb.AppendLine($"Frakt:\t\t\t{shippingCost:F2}\t\tSEK");
 		_sb.AppendLine("-----------------------------");
-		_sb.AppendLine($"Total:\t\t\t{PriceRules.BaseCost + wc.Total + ic + (validCountry ? shippingCost : 0):F2}\t\tSEK");
+		_sb.AppendLine($"Total:\t\t\t{(baseCost + wc.Total + ic):F2}\t\tSEK");
 
 		return _sb.ToString();
 	}
