@@ -5,7 +5,7 @@ static class ReceiptManager
 	const string INDEXER_PATH = "orders/.INDEXER";
 
 	const string ORDERS_DIRECTORY = "orders";
-	public const string ORDER_PREFIX = "PK-";
+	const string ORDER_PREFIX = "PK-";
 
 	static readonly StringBuilder _sb = new();
 
