@@ -56,7 +56,7 @@ static class ReceiptManager
 		if (validCountry)
 			_sb.AppendLine($"Frakt:\t\t\t{shippingCost:F2}\t\tSEK");
 		_sb.AppendLine("-----------------------------");
-		_sb.AppendLine($"Total:\t\t\t{PriceRules.BaseCost + wc.Total + ic + (validCountry ? shippingCost : 0)}\t\tSEK");
+		_sb.AppendLine($"Total:\t\t\t{PriceRules.BaseCost + wc.Total + ic + (validCountry ? shippingCost : 0):F2}\t\tSEK");
 
 		return _sb.ToString();
 	}
