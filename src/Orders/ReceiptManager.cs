@@ -2,7 +2,27 @@ using System.Text;
 
 static class ReceiptManager
 {
+	const string INDEXER_PATH = "orders/.INDEXER";
+
+	const string ORDERS_DIRECTORY = "orders";
+	const string ORDER_PREFIX = "PK-";
+
 	static readonly StringBuilder _sb = new();
+
+	static int GetIndex()
+	{
+		try
+		{
+			if (int.TryParse(File.ReadAllText(INDEXER_PATH), out int i))
+				return i;
+
+			return -1;
+		}
+		catch
+		{
+			return -1;
+		}
+	}
 
 	public static string GetReceipt(Order order)
 	{
@@ -41,5 +61,23 @@ static class ReceiptManager
 		return _sb.ToString();
 	}
 
-	// TODO: Add write to file and fetch from file methods.
+	public static bool SaveToFile(Order order)
+	{
+		int index = GetIndex();
+		if (index == -1)
+			return false;
+
+		string receipt = GetReceipt(order);
+
+		try
+		{
+			File.WriteAllText($"{ORDERS_DIRECTORY}/{ORDER_PREFIX}{index++}", receipt);
+			File.WriteAllText(INDEXER_PATH, index.ToString());
+			return true;
+		}
+		catch
+		{
+			return false;
+		}
+	}
 }
